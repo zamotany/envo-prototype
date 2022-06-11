@@ -5,5 +5,15 @@ services:
       context: ./
       dockerfile: ./services/admin/api/Dockerfile
       target: production
+    volumes:
+      - ./tmp/admin/api:/tmp/admin/api
+    environment:
+      - PORT=3000
+      - HOST=0.0.0.0
+      - LOGGING_LEVEL_CONSOLE=trace
+      - LOGGING_LEVEL_STDOUT=trace
+      - LOGGING_LEVEL_STDERR=warn
+      - LOGGING_STDOUT_FILE=/tmp/admin/api/stdout.log
+      - LOGGING_STDERR_FILE=/tmp/admin/api/stderr.log
     ports:
       - 3000:3000

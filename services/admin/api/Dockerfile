@@ -41,4 +41,6 @@ RUN yarn workspaces focus --production
 
 COPY --from=build ${baseDir}/${packagePath}/dist ./dist
 
+ENV NODE_ENV=production
+
 CMD [ "node", "dist/main.js" ]

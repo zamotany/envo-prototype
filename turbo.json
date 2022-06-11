@@ -4,6 +4,10 @@
   "pipeline": {
     "build": {
       "dependsOn": ["^build"]
+    },
+    "dev:local": {
+      "dependsOn": ["build"],
+      "cache": false
     }
   }
 }

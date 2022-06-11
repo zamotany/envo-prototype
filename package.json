@@ -7,7 +7,8 @@
   ],
   "scripts": {
     "build": "turbo run build",
-    "dev": "docker compose -f docker-compose.dev.yml up --build"
+    "dev": "docker compose -f docker-compose.dev.yml up --build",
+    "dev:local": "turbo run dev:local"
   },
   "dependencies": {
     "glob": "^8.0.3",
