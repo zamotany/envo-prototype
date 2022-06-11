@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  admin-api:
+    build:
+      context: ./
+      dockerfile: ./services/admin/api/Dockerfile
+      target: production
+    ports:
+      - 3000:3000

@@ -1,0 +1,17 @@
+{
+  "name": "admin-api",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc && node ../../../scripts/import-ext.cjs './dist/**/*.js'"
+  },
+  "dependencies": {
+    "fastify": "^4.0.1"
+  },
+  "devDependencies": {
+    "@callstack/eslint-config": "^12.0.2",
+    "@types/node": "16",
+    "eslint": "^8.17.0",
+    "typescript": "^4.7.3"
+  }
+}

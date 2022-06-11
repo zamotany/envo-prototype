@@ -1,0 +1,16 @@
+{
+  "name": "envo",
+  "private": true,
+  "packageManager": "yarn@3.2.1",
+  "workspaces": [
+    "./services/**"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "docker compose -f docker-compose.dev.yml up --build"
+  },
+  "dependencies": {
+    "glob": "^8.0.3",
+    "turbo": "^1.2.16"
+  }
+}
