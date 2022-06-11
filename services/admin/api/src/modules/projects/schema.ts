@@ -8,3 +8,9 @@ export const createProjectSchema = T.Object({
 });
 
 export type CreateProjectSchema = Static<typeof createProjectSchema>;
+
+export const projectParamsSchema = T.Object({
+  id: T.Number(),
+});
+
+export type ProjectParamsSchema = Static<typeof projectParamsSchema>;

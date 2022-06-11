@@ -6,14 +6,25 @@ services:
       dockerfile: ./services/admin/api/Dockerfile
       target: production
     volumes:
-      - ./tmp/admin/api:/tmp/admin/api
+      - ./temp/admin/api:/temp/admin/api
     environment:
       - PORT=3000
       - HOST=0.0.0.0
       - LOGGING_LEVEL_CONSOLE=trace
       - LOGGING_LEVEL_STDOUT=trace
       - LOGGING_LEVEL_STDERR=warn
-      - LOGGING_STDOUT_FILE=/tmp/admin/api/stdout.log
-      - LOGGING_STDERR_FILE=/tmp/admin/api/stderr.log
+      - LOGGING_STDOUT_FILE=/temp/admin/api/stdout.log
+      - LOGGING_STDERR_FILE=/temp/admin/api/stderr.log
+      - DATABASE_URL="postgresql://postgres:envo@admin-db:5432/envo?schema=public"
     ports:
       - 3000:3000
+  admin-db:
+    image: postgres:latest
+    volumes:
+      - ./temp/admin/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=envo
+      - POSTGRES_PASSWORD=envo
+    ports:
+      - 5432:5432
+

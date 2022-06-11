@@ -1,6 +1,11 @@
 import { FastifyInstance } from 'fastify';
 import { ProjectsRepository } from './repository';
-import { CreateProjectSchema, createProjectSchema } from './schema';
+import {
+  CreateProjectSchema,
+  createProjectSchema,
+  projectParamsSchema,
+  ProjectParamsSchema,
+} from './schema';
 
 export interface ProjectsModuleOptions {
   repository?: ProjectsRepository;
@@ -8,7 +13,9 @@ export interface ProjectsModuleOptions {
 
 export async function projectsModule(
   app: FastifyInstance,
-  { repository = new ProjectsRepository() }: ProjectsModuleOptions = {}
+  {
+    repository = new ProjectsRepository(app.prisma, app.log),
+  }: ProjectsModuleOptions = {}
 ) {
   app.get('/projects', async (request, reply) => {
     const projects = await repository.getAll();
@@ -26,8 +33,9 @@ export async function projectsModule(
     }
   );
 
-  app.delete<{ Params: { id: string } }>(
+  app.delete<{ Params: ProjectParamsSchema }>(
     '/projects/:id',
+    { schema: { params: projectParamsSchema } },
     async (request, reply) => {
       await repository.remove(request.params.id);
       reply.code(200).send({ data: null });
