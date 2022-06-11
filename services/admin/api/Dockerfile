@@ -18,10 +18,10 @@ COPY scripts ./scripts
 
 WORKDIR ${baseDir}/${packagePath}
 COPY ${packagePath}/package.json ./
+RUN yarn install
+
 COPY ${packagePath}/tsconfig.json ./
 COPY ${packagePath}/src ./src
-
-RUN yarn install
 RUN yarn build
 
 FROM node:16-alpine AS production
@@ -37,8 +37,8 @@ COPY --from=build ${baseDir}/.yarn ./.yarn
 
 WORKDIR ${baseDir}/${packagePath}
 COPY --from=build ${baseDir}/${packagePath}/package.json ./
-COPY --from=build ${baseDir}/${packagePath}/dist ./dist
-
 RUN yarn workspaces focus --production
+
+COPY --from=build ${baseDir}/${packagePath}/dist ./dist
 
 CMD [ "node", "dist/main.js" ]
