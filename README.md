@@ -17,3 +17,12 @@
 
 - `docker compose -f ./docker-compose.dev.yml up admin-db` - Start only `admin-db` Docker service for development 
 - `docker compose -f ./docker-compose.dev.yml run -i --rm <service> /bin/sh` - Run interactive shell in Docker `<service>`
+
+## Prisma:
+
+Admin API service (`service/admin/api`) uses Prisma to manage the data.
+
+To create a new migration in development follow these steps:
+
+1. Start `admin-db` Docker service: `docker compose -f ./docker-compose.dev.yml up admin-db`
+2. Run Prisma CLI: `yarn workspace admin-api run prisma migrate dev`

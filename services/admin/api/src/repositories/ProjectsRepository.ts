@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import { FastifyLoggerInstance } from 'fastify';
 import httpErrors from 'http-errors';
-import { CreateProjectSchema } from './schema';
+import { CreateProjectSchema } from '../schemas/projectsSchemas';
 
 export class ProjectsRepository {
   constructor(
@@ -23,15 +23,16 @@ export class ProjectsRepository {
   }
 
   async remove(id: number) {
-    const project = await this.prisma.project.findFirst({ where: { id } });
-    if (!project) {
-      throw new httpErrors.NotFound('Project not found');
-    }
+    return await this.prisma.$transaction(async () => {
+      if (!(await this.prisma.project.findFirst({ where: { id } }))) {
+        throw new httpErrors.NotFound('Project not found');
+      }
 
-    return await this.prisma.project.delete({
-      where: {
-        id,
-      },
+      return await this.prisma.project.delete({
+        where: {
+          id,
+        },
+      });
     });
   }
 }

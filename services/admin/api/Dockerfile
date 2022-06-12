@@ -42,8 +42,8 @@ COPY --from=build ${baseDir}/.yarn ./.yarn
 
 WORKDIR ${baseDir}/${packagePath}
 COPY --from=build ${baseDir}/${packagePath}/package.json ./
-COPY --from=build ${baseDir}/${packagePath}/prisma ./prisma
 RUN yarn workspaces focus --production
+COPY --from=build ${baseDir}/${packagePath}/prisma ./prisma
 RUN yarn prisma generate
 COPY --from=build ${baseDir}/${packagePath}/dist ./dist
 

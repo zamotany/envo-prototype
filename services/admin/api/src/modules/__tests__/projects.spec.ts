@@ -12,9 +12,8 @@ async function createApp(repository: Record<string, SpyInstanceFn>) {
       },
     },
   });
-  await app.register(projectsModule, {
-    repository,
-  });
+  await app.decorate('projectsRepository', repository);
+  await app.register(projectsModule);
 
   return app;
 }

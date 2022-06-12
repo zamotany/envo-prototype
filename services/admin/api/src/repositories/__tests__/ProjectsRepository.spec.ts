@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, SpyInstanceFn } from 'vitest';
-import { ProjectsRepository } from '../repository';
+import { ProjectsRepository } from '../ProjectsRepository';
 
 async function createProjectsRepository(
   project: Record<string, SpyInstanceFn>
@@ -8,6 +8,9 @@ async function createProjectsRepository(
   const { PrismaClient } = await vi.importMock('@prisma/client');
 
   const prisma = new PrismaClient();
+  prisma.$transaction = vi.fn(async (fn) => {
+    return await fn();
+  });
   prisma.project = project;
 
   const logger = pino();

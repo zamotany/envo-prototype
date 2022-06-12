@@ -10,6 +10,8 @@ services:
       - ./services/nginx/sites-enabled:/etc/nginx/sites-enabled
     ports:
       - "8080:8080"
+    depends_on:
+      - admin-api
   admin-api:
     build:
       context: ./
@@ -29,7 +31,6 @@ services:
     ports:
       - 8081:8080
     depends_on:
-      - proxy
       - admin-db
   admin-db:
     image: postgres:latest

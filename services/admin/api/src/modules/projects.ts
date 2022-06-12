@@ -1,22 +1,14 @@
 import { FastifyInstance } from 'fastify';
-import { ProjectsRepository } from './repository';
 import {
   CreateProjectSchema,
   createProjectSchema,
   projectParamsSchema,
   ProjectParamsSchema,
-} from './schema';
+} from '../schemas/projectsSchemas';
 
-export interface ProjectsModuleOptions {
-  repository?: ProjectsRepository;
-}
+export async function projectsModule(app: FastifyInstance) {
+  const repository = app.projectsRepository;
 
-export async function projectsModule(
-  app: FastifyInstance,
-  {
-    repository = new ProjectsRepository(app.prisma, app.log),
-  }: ProjectsModuleOptions = {}
-) {
   app.get('/projects', async (request, reply) => {
     const projects = await repository.getAll();
     reply.send({ data: projects });

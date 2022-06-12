@@ -1,13 +1,9 @@
 import fastify, { FastifyServerOptions } from 'fastify';
-import { Prisma, PrismaClient } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 import httpErrors from 'http-errors';
-import { projectsModule } from './modules/projects/projects';
-
-declare module 'fastify' {
-  interface FastifyInstance {
-    prisma: PrismaClient;
-  }
-}
+import { projectsModule } from './modules/projects';
+import { environmentsModule } from './modules/environments';
+import repositoriesPlugin from './plugins/repositories';
 
 export async function createServer(options?: FastifyServerOptions) {
   const app = fastify({
@@ -22,10 +18,7 @@ export async function createServer(options?: FastifyServerOptions) {
 
   // Plugins
   await app.register(import('@fastify/sensible'));
-
-  // Dependencies
-  const prisma = new PrismaClient();
-  app.decorate('prisma', prisma);
+  await app.register(repositoriesPlugin);
 
   // Global handlers
   app.setErrorHandler(async (error, request, reply) => {
@@ -73,6 +66,7 @@ export async function createServer(options?: FastifyServerOptions) {
 
   // Modules
   await app.register(projectsModule);
+  await app.register(environmentsModule);
 
   // Misc routes
   app.get('/', () => ({ status: 'ok' }));
