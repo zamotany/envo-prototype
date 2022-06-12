@@ -7,6 +7,7 @@
   ],
   "scripts": {
     "build": "turbo run build",
+    "test": "turbo run test",
     "dev": "docker compose -f docker-compose.dev.yml up --build",
     "dev:local": "turbo run dev:local"
   },
