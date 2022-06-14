@@ -1,0 +1,249 @@
+_type: export
+__export_format: 4
+__export_date: 2022-06-12T17:19:44.729Z
+__export_source: insomnia.desktop.app:v2022.4.0
+resources:
+  - _id: req_24e2f8c24290453ba3e8cc0f78d8adb0
+    parentId: fld_0b624b6914204396b530ab16eff5bdd8
+    modified: 1655048263166
+    created: 1654981454038
+    url: "{{baseUrl}}/projects"
+    name: list projects
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1654981454038
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_0b624b6914204396b530ab16eff5bdd8
+    parentId: fld_df263a4973854d50aef7bd3462bb94c4
+    modified: 1654986537581
+    created: 1654986537581
+    name: projects
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1654986537581
+    _type: request_group
+  - _id: fld_df263a4973854d50aef7bd3462bb94c4
+    parentId: wrk_c9e4ad1ebbe6424db91d7821cc0bbf73
+    modified: 1654986506232
+    created: 1654986506232
+    name: admin
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1654986506232
+    _type: request_group
+  - _id: wrk_c9e4ad1ebbe6424db91d7821cc0bbf73
+    parentId: null
+    modified: 1654981454025
+    created: 1654981454025
+    name: New Document
+    description: ""
+    scope: design
+    _type: workspace
+  - _id: req_97b5aa510cf643a9a1363973d3156209
+    parentId: fld_0b624b6914204396b530ab16eff5bdd8
+    modified: 1655047810392
+    created: 1654986631194
+    url: "{{baseUrl}}/projects"
+    name: add project
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: >-
+        {
+        	"data": {
+        		"name": "{% faker 'commerce', '', 'productName', '', '', '', '', '', '', '', '', '', '', '', '', '', 'en' %}"
+        	}
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_ca8fd092356446b08706df7deaa1a6ef
+    authentication: {}
+    metaSortKey: -1654981453988
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_3e571b2171dd49fd9ade2b137c9c55a1
+    parentId: fld_0b624b6914204396b530ab16eff5bdd8
+    modified: 1655050326205
+    created: 1654986638279
+    url: "{{baseUrl}}/projects/4"
+    name: remove project
+    description: ""
+    method: DELETE
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1654981453938
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_55aa0251e6a6417880c4aa2b7370e23e
+    parentId: fld_95f3b8f0c6be482ca6cf81efcaa555a9
+    modified: 1655051709381
+    created: 1655049979746
+    url: "{{baseUrl}}/projects/4/envs"
+    name: list envs
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1654981454038
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_95f3b8f0c6be482ca6cf81efcaa555a9
+    parentId: fld_df263a4973854d50aef7bd3462bb94c4
+    modified: 1655049979745
+    created: 1655049979745
+    name: environments
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1654986521906.5
+    _type: request_group
+  - _id: req_acb27221136748a582b5dfd259a4c10e
+    parentId: fld_95f3b8f0c6be482ca6cf81efcaa555a9
+    modified: 1655051095593
+    created: 1655049979748
+    url: "{{baseUrl}}/projects/4/envs"
+    name: add env
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: >-
+        {
+        	"data": {
+        		"name": "{% faker 'name', '', 'productName', '', '', '', '', '', '', '', '', 'firstName', '', '', '', '', 'en' %}"
+        	}
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_ca8fd092356446b08706df7deaa1a6ef
+    authentication: {}
+    metaSortKey: -1654981453988
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_824b136da71247848cb876d4e2492c62
+    parentId: fld_95f3b8f0c6be482ca6cf81efcaa555a9
+    modified: 1655051729291
+    created: 1655049979749
+    url: "{{baseUrl}}/projects/4/envs/3"
+    name: remove env
+    description: ""
+    method: DELETE
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1654981453938
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: env_7020c0200248c0970421af441f3b6fcf72ef32a2
+    parentId: wrk_c9e4ad1ebbe6424db91d7821cc0bbf73
+    modified: 1654986563520
+    created: 1654981454035
+    name: Base Environment
+    data: {}
+    dataPropertyOrder: {}
+    color: null
+    isPrivate: false
+    metaSortKey: 1654981454035
+    _type: environment
+  - _id: jar_7020c0200248c0970421af441f3b6fcf72ef32a2
+    parentId: wrk_c9e4ad1ebbe6424db91d7821cc0bbf73
+    modified: 1654981454037
+    created: 1654981454037
+    name: Default Jar
+    cookies: []
+    _type: cookie_jar
+  - _id: spc_a8f4dbc928834bbf965ccf1bc282380c
+    parentId: wrk_c9e4ad1ebbe6424db91d7821cc0bbf73
+    modified: 1654986486675
+    created: 1654981454033
+    fileName: envo
+    contents: ""
+    contentType: yaml
+    _type: api_spec
+  - _id: uts_2a5395d0426c4c7690a255bd7dab5cab
+    parentId: wrk_c9e4ad1ebbe6424db91d7821cc0bbf73
+    modified: 1654981454039
+    created: 1654981454039
+    name: Example Test Suite
+    _type: unit_test_suite
+  - _id: env_f631973f38244df785bba7d20c43d509
+    parentId: env_7020c0200248c0970421af441f3b6fcf72ef32a2
+    modified: 1655047791190
+    created: 1654986567091
+    name: development
+    data:
+      baseUrl: http://localhost:8080/api/admin
+    dataPropertyOrder:
+      "&":
+        - baseUrl
+    color: null
+    isPrivate: false
+    metaSortKey: 1654986567091
+    _type: environment
+  - _id: env_462928b83cad42489237ed1de0fccac4
+    parentId: env_7020c0200248c0970421af441f3b6fcf72ef32a2
+    modified: 1655047793079
+    created: 1655047766702
+    name: development-local
+    data:
+      baseUrl: http://localhost:3000
+    dataPropertyOrder:
+      "&":
+        - baseUrl
+    color: null
+    isPrivate: false
+    metaSortKey: 1655047766702
+    _type: environment
