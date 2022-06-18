@@ -18,6 +18,8 @@ model Project {
   name String @db.VarChar(255)
   description String? @db.VarChar(255)
   environments Environment[]
+  owner User @relation(fields: [ownerId], references: [id])
+  ownerId Int
 }
 
 model Environment {
@@ -37,4 +39,5 @@ model User {
   username String @db.VarChar(128)
   hash String @db.VarChar(512)
   salt String @db.VarChar(256)
+  projects Project[]
 }

@@ -15,7 +15,10 @@ export async function environmentsModule(app: FastifyInstance) {
     '/projects/:projectId/envs',
     { schema: { params: environmentsParamsSchema } },
     async (request, reply) => {
-      const envs = await repository.getAll(request.params.projectId);
+      const envs = await repository.getAll(
+        request.params.projectId,
+        request.auth.getUserId()
+      );
       reply.send({ data: envs });
     }
   );
@@ -34,7 +37,8 @@ export async function environmentsModule(app: FastifyInstance) {
     async (request, reply) => {
       const env = await repository.insert(
         request.params.projectId,
-        request.body
+        request.body,
+        request.auth.getUserId()
       );
       reply.code(201).send({ data: env });
     }
@@ -47,7 +51,11 @@ export async function environmentsModule(app: FastifyInstance) {
     '/projects/:projectId/envs/:id',
     { schema: { params: environmentParamsSchema } },
     async (request, reply) => {
-      await repository.remove(request.params.projectId, request.params.id);
+      await repository.remove(
+        request.params.projectId,
+        request.params.id,
+        request.auth.getUserId()
+      );
       reply.code(200).send({ data: null });
     }
   );

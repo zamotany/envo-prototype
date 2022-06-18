@@ -20,7 +20,10 @@ export async function projectsModule(app: FastifyInstance) {
     '/projects',
     { schema: { body: createProjectSchema } },
     async (request, reply) => {
-      const project = await repository.insert(request.body);
+      const project = await repository.insert(
+        request.body,
+        request.auth.getUserId()
+      );
       reply.code(201).send({ data: project });
     }
   );

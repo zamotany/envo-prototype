@@ -11,8 +11,8 @@ declare module 'fastify' {
   }
 
   interface FastifyRequest {
-    auth?: {
-      userId: number;
+    auth: {
+      getUserId: () => number;
     };
   }
 }
@@ -34,6 +34,11 @@ async function authPlugin(app: FastifyInstance) {
 
   app.addHook('onRequest', async (request, reply) => {
     if (request.context.config.auth === false) {
+      request.auth = {
+        getUserId: () => {
+          throw new Error('Cannot get userId id auth is disabled');
+        },
+      };
       return;
     }
 
@@ -72,7 +77,7 @@ async function authPlugin(app: FastifyInstance) {
       return;
     }
 
-    request.auth = { userId: parseInt(userId, 10) };
+    request.auth = { getUserId: () => parseInt(userId, 10) };
   });
 
   app.post<{

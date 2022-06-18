@@ -13,11 +13,12 @@ export class ProjectsRepository {
     return this.prisma.project.findMany();
   }
 
-  async insert(payload: CreateProjectSchema) {
+  async insert(payload: CreateProjectSchema, ownerId: number) {
     return this.prisma.project.create({
       data: {
         name: payload.data.name,
         description: payload.data.description,
+        ownerId,
       },
     });
   }

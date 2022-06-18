@@ -38,7 +38,7 @@ describe.concurrent('ProjectsRepository', () => {
     });
     const data = { name: 'Test project' };
 
-    await expect(repository.insert({ data })).resolves.toEqual({
+    await expect(repository.insert({ data }, 1)).resolves.toEqual({
       id: 1,
       ...data,
     });

@@ -9,11 +9,12 @@ export class EnvironmentsRepository {
     private log: FastifyLoggerInstance
   ) {}
 
-  async ensureProjectExists(projectId: number) {
+  async ensureProjectExists(projectId: number, ownerId: number) {
     if (
       !(await this.prisma.project.findFirst({
         where: {
           id: projectId,
+          ownerId,
         },
       }))
     ) {
@@ -21,9 +22,9 @@ export class EnvironmentsRepository {
     }
   }
 
-  async getAll(projectId: number) {
+  async getAll(projectId: number, ownerId: number) {
     return await this.prisma.$transaction(async () => {
-      await this.ensureProjectExists(projectId);
+      await this.ensureProjectExists(projectId, ownerId);
       return await this.prisma.environment.findMany({
         where: {
           projectId,
@@ -32,9 +33,13 @@ export class EnvironmentsRepository {
     });
   }
 
-  async insert(projectId: number, payload: CreateEnvironmentSchema) {
+  async insert(
+    projectId: number,
+    payload: CreateEnvironmentSchema,
+    ownerId: number
+  ) {
     return await this.prisma.$transaction(async () => {
-      await this.ensureProjectExists(projectId);
+      await this.ensureProjectExists(projectId, ownerId);
       return await this.prisma.environment.create({
         data: {
           name: payload.data.name,
@@ -45,9 +50,9 @@ export class EnvironmentsRepository {
     });
   }
 
-  async remove(projectId: number, id: number) {
+  async remove(projectId: number, id: number, ownerId: number) {
     return await this.prisma.$transaction(async () => {
-      await this.ensureProjectExists(projectId);
+      await this.ensureProjectExists(projectId, ownerId);
 
       const env = await this.prisma.environment.findFirst({ where: { id } });
 
