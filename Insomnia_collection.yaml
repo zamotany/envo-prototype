@@ -1,11 +1,90 @@
 _type: export
 __export_format: 4
-__export_date: 2022-06-12T17:19:44.729Z
-__export_source: insomnia.desktop.app:v2022.4.0
+__export_date: 2022-06-18T13:19:22.475Z
+__export_source: insomnia.desktop.app:v2022.4.1
 resources:
+  - _id: req_3a970945ed684e81943df6dde9771693
+    parentId: wrk_c9e4ad1ebbe6424db91d7821cc0bbf73
+    modified: 1655421386957
+    created: 1655420741368
+    url: https://localhost:4443/api/admin
+    name: New Request
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1655420741368
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: wrk_c9e4ad1ebbe6424db91d7821cc0bbf73
+    parentId: null
+    modified: 1654981454025
+    created: 1654981454025
+    name: New Document
+    description: ""
+    scope: design
+    _type: workspace
+  - _id: req_4439394d59004f64a6a41189ee8e619a
+    parentId: fld_20f9486d388f4170a0aa0e6f3c66902b
+    modified: 1655557670453
+    created: 1655397093313
+    url: "{{baseUrl}}/user/token"
+    name: token
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"username": "test_acct1",
+        	"password": "envopass!"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_0052c1918c8a4120903c4992e15c4ba1
+    authentication: {}
+    metaSortKey: -1655397093313
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_20f9486d388f4170a0aa0e6f3c66902b
+    parentId: fld_df263a4973854d50aef7bd3462bb94c4
+    modified: 1655397091617
+    created: 1655397091617
+    name: user
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1655397091617
+    _type: request_group
+  - _id: fld_df263a4973854d50aef7bd3462bb94c4
+    parentId: wrk_c9e4ad1ebbe6424db91d7821cc0bbf73
+    modified: 1654986506232
+    created: 1654986506232
+    name: admin
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1654986506232
+    _type: request_group
   - _id: req_24e2f8c24290453ba3e8cc0f78d8adb0
     parentId: fld_0b624b6914204396b530ab16eff5bdd8
-    modified: 1655048263166
+    modified: 1655555339012
     created: 1654981454038
     url: "{{baseUrl}}/projects"
     name: list projects
@@ -13,8 +92,15 @@ resources:
     method: GET
     body: {}
     parameters: []
-    headers: []
-    authentication: {}
+    headers:
+      - id: pair_351b4a7e11da4acb97465471877760a8
+        name: ""
+        value: ""
+        description: ""
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_4439394d59004f64a6a41189ee8e619a',
+        'b64::JFsnZGF0YSddWyd0b2tlbidd::46b', 'never', 60 %}"
     metaSortKey: -1654981454038
     isPrivate: false
     settingStoreCookies: true
@@ -34,27 +120,9 @@ resources:
     environmentPropertyOrder: null
     metaSortKey: -1654986537581
     _type: request_group
-  - _id: fld_df263a4973854d50aef7bd3462bb94c4
-    parentId: wrk_c9e4ad1ebbe6424db91d7821cc0bbf73
-    modified: 1654986506232
-    created: 1654986506232
-    name: admin
-    description: ""
-    environment: {}
-    environmentPropertyOrder: null
-    metaSortKey: -1654986506232
-    _type: request_group
-  - _id: wrk_c9e4ad1ebbe6424db91d7821cc0bbf73
-    parentId: null
-    modified: 1654981454025
-    created: 1654981454025
-    name: New Document
-    description: ""
-    scope: design
-    _type: workspace
   - _id: req_97b5aa510cf643a9a1363973d3156209
     parentId: fld_0b624b6914204396b530ab16eff5bdd8
-    modified: 1655047810392
+    modified: 1655555009548
     created: 1654986631194
     url: "{{baseUrl}}/projects"
     name: add project
@@ -70,10 +138,15 @@ resources:
         }
     parameters: []
     headers:
-      - name: Content-Type
+      - id: pair_6654de793a1f467586a2e43d98aa2075
+        name: content-type
         value: application/json
-        id: pair_ca8fd092356446b08706df7deaa1a6ef
-    authentication: {}
+        description: ""
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_4439394d59004f64a6a41189ee8e619a',
+        'b64::JFsnZGF0YSddWyd0b2tlbidd::46b', 'never', 60 %}"
+      disabled: false
     metaSortKey: -1654981453988
     isPrivate: false
     settingStoreCookies: true
@@ -85,7 +158,7 @@ resources:
     _type: request
   - _id: req_3e571b2171dd49fd9ade2b137c9c55a1
     parentId: fld_0b624b6914204396b530ab16eff5bdd8
-    modified: 1655050326205
+    modified: 1655554120241
     created: 1654986638279
     url: "{{baseUrl}}/projects/4"
     name: remove project
@@ -106,16 +179,19 @@ resources:
     _type: request
   - _id: req_55aa0251e6a6417880c4aa2b7370e23e
     parentId: fld_95f3b8f0c6be482ca6cf81efcaa555a9
-    modified: 1655051709381
+    modified: 1655557677497
     created: 1655049979746
-    url: "{{baseUrl}}/projects/4/envs"
+    url: "{{baseUrl}}/projects/1/environments"
     name: list envs
     description: ""
     method: GET
     body: {}
     parameters: []
     headers: []
-    authentication: {}
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_4439394d59004f64a6a41189ee8e619a',
+        'b64::JFsnZGF0YSddWyd0b2tlbidd::46b', 'never', 60 %}"
     metaSortKey: -1654981454038
     isPrivate: false
     settingStoreCookies: true
@@ -137,9 +213,9 @@ resources:
     _type: request_group
   - _id: req_acb27221136748a582b5dfd259a4c10e
     parentId: fld_95f3b8f0c6be482ca6cf81efcaa555a9
-    modified: 1655051095593
+    modified: 1655556401678
     created: 1655049979748
-    url: "{{baseUrl}}/projects/4/envs"
+    url: "{{baseUrl}}/projects/1/environments"
     name: add env
     description: ""
     method: POST
@@ -156,7 +232,10 @@ resources:
       - name: Content-Type
         value: application/json
         id: pair_ca8fd092356446b08706df7deaa1a6ef
-    authentication: {}
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_4439394d59004f64a6a41189ee8e619a',
+        'b64::JFsnZGF0YSddWyd0b2tlbidd::46b', 'never', 60 %}"
     metaSortKey: -1654981453988
     isPrivate: false
     settingStoreCookies: true
@@ -168,16 +247,111 @@ resources:
     _type: request
   - _id: req_824b136da71247848cb876d4e2492c62
     parentId: fld_95f3b8f0c6be482ca6cf81efcaa555a9
-    modified: 1655051729291
+    modified: 1655556403975
     created: 1655049979749
-    url: "{{baseUrl}}/projects/4/envs/3"
+    url: "{{baseUrl}}/projects/1/environments/1"
     name: remove env
     description: ""
     method: DELETE
     body: {}
     parameters: []
     headers: []
-    authentication: {}
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_4439394d59004f64a6a41189ee8e619a',
+        'b64::JFsnZGF0YSddWyd0b2tlbidd::46b', 'never', 60 %}"
+    metaSortKey: -1654981453938
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_a5a52017673945b49bbd525ea60bff4b
+    parentId: fld_becc0a6d68544891bccb77a7d7a8c275
+    modified: 1655557785744
+    created: 1655557608343
+    url: "{{baseUrl}}/projects/1/environments/2/configs"
+    name: list configs
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_4439394d59004f64a6a41189ee8e619a',
+        'b64::JFsnZGF0YSddWyd0b2tlbidd::46b', 'never', 60 %}"
+    metaSortKey: -1654981454038
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_becc0a6d68544891bccb77a7d7a8c275
+    parentId: fld_df263a4973854d50aef7bd3462bb94c4
+    modified: 1655557608339
+    created: 1655557608339
+    name: configs
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1654986514069.25
+    _type: request_group
+  - _id: req_3f621e3dee944d7d89e93dca3cea90a7
+    parentId: fld_becc0a6d68544891bccb77a7d7a8c275
+    modified: 1655557766424
+    created: 1655557608345
+    url: "{{baseUrl}}/projects/1/environments/2/configs"
+    name: add config
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: >-
+        {
+        	"data": {
+        		"changelog": "Ver {% faker 'random', '', '', '', '', '', '', '', '', '', '', '', '', 'number', '', '', 'en' %}"
+        	}
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_ca8fd092356446b08706df7deaa1a6ef
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_4439394d59004f64a6a41189ee8e619a',
+        'b64::JFsnZGF0YSddWyd0b2tlbidd::46b', 'never', 60 %}"
+    metaSortKey: -1654981453988
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_a0afdc9698b04e3486e6d0245dc92b97
+    parentId: fld_becc0a6d68544891bccb77a7d7a8c275
+    modified: 1655557759239
+    created: 1655557608347
+    url: "{{baseUrl}}/projects/1/environments/2/configs/1"
+    name: remove config
+    description: ""
+    method: DELETE
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_4439394d59004f64a6a41189ee8e619a',
+        'b64::JFsnZGF0YSddWyd0b2tlbidd::46b', 'never', 60 %}"
     metaSortKey: -1654981453938
     isPrivate: false
     settingStoreCookies: true
@@ -221,25 +395,27 @@ resources:
     _type: unit_test_suite
   - _id: env_f631973f38244df785bba7d20c43d509
     parentId: env_7020c0200248c0970421af441f3b6fcf72ef32a2
-    modified: 1655047791190
+    modified: 1655401854214
     created: 1654986567091
     name: development
     data:
-      baseUrl: http://localhost:8080/api/admin
+      baseUrl: https://localhost:4443/api/admin
+      data: /data
     dataPropertyOrder:
       "&":
         - baseUrl
+        - data
     color: null
     isPrivate: false
     metaSortKey: 1654986567091
     _type: environment
   - _id: env_462928b83cad42489237ed1de0fccac4
     parentId: env_7020c0200248c0970421af441f3b6fcf72ef32a2
-    modified: 1655047793079
+    modified: 1655401852011
     created: 1655047766702
     name: development-local
     data:
-      baseUrl: http://localhost:3000
+      baseUrl: http://localhost:8081
     dataPropertyOrder:
       "&":
         - baseUrl
