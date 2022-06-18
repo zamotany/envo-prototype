@@ -3,12 +3,14 @@ import fastifyPlugin from 'fastify-plugin';
 import { PrismaClient } from '@prisma/client';
 import { ProjectsRepository } from '../repositories/ProjectsRepository';
 import { EnvironmentsRepository } from '../repositories/EnvironmentsRepository';
+import { ConfigsRepository } from '../repositories/ConfigsRepository';
 
 declare module 'fastify' {
   interface FastifyInstance {
     prisma: PrismaClient;
     projectsRepository: ProjectsRepository;
     environmentsRepository: EnvironmentsRepository;
+    configsRepository: ConfigsRepository;
   }
 }
 
@@ -27,6 +29,7 @@ async function repositoriesPlugin(app: FastifyInstance) {
     'environmentsRepository',
     new EnvironmentsRepository(app.prisma, app.log)
   );
+  app.decorate('configsRepository', new ConfigsRepository(app.prisma, app.log));
 
   app.addHook('onRequest', async (request, reply) => {
     if (isConnecting || !isConnected) {

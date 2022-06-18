@@ -2,42 +2,55 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["interactiveTransactions"]
 }
 
 datasource db {
   provider = "postgresql"
-  url = env("DATABASE_URL")
+  url      = env("DATABASE_URL")
 }
 
 model Project {
-  id Int @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  name String @db.VarChar(255)
-  description String? @db.VarChar(255)
+  id           Int           @id @default(autoincrement())
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  name         String        @db.VarChar(255)
+  description  String?       @db.VarChar(255)
   environments Environment[]
-  owner User @relation(fields: [ownerId], references: [id])
-  ownerId Int
+  owner        User          @relation(fields: [ownerId], references: [id])
+  ownerId      Int
 }
 
 model Environment {
-  id Int @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  name String @db.VarChar(255)
-  description String? @db.VarChar(255)
-  project Project @relation(fields: [projectId], references: [id])
-  projectId Int
+  id             Int      @id @default(autoincrement())
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  name           String   @db.VarChar(255)
+  description    String?  @db.VarChar(255)
+  project        Project  @relation(fields: [projectId], references: [id])
+  projectId      Int
+  configs        Config[] @relation(name: "Configs")
+  activeConfig   Config?  @relation(name: "ActiveConfig", fields: [activeConfigId], references: [id])
+  activeConfigId Int?
 
   @@unique([id, projectId])
 }
 
+model Config {
+  id                Int           @id @default(autoincrement())
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  changelog         String
+  environment       Environment   @relation(name: "Configs", fields: [environmentId], references: [id])
+  environmentId     Int
+  activeEnvironment Environment[] @relation(name: "ActiveConfig")
+}
+
 model User {
-  id Int @id @default(autoincrement())
-  username String @db.VarChar(128)
-  hash String @db.VarChar(512)
-  salt String @db.VarChar(256)
+  id       Int       @id @default(autoincrement())
+  username String    @db.VarChar(128)
+  hash     String    @db.VarChar(512)
+  salt     String    @db.VarChar(256)
   projects Project[]
 }

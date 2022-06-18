@@ -21,8 +21,8 @@ export async function projectsModule(app: FastifyInstance) {
     { schema: { body: createProjectSchema } },
     async (request, reply) => {
       const project = await repository.insert(
-        request.body,
-        request.auth.getUserId()
+        { userId: request.auth.getUserId() },
+        request.body
       );
       reply.code(201).send({ data: project });
     }
@@ -32,7 +32,10 @@ export async function projectsModule(app: FastifyInstance) {
     '/projects/:id',
     { schema: { params: projectParamsSchema } },
     async (request, reply) => {
-      await repository.remove(request.params.id);
+      await repository.remove({
+        userId: request.auth.getUserId(),
+        id: request.params.id,
+      });
       reply.code(200).send({ data: null });
     }
   );

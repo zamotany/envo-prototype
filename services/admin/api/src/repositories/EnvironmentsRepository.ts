@@ -3,6 +3,8 @@ import { FastifyLoggerInstance } from 'fastify';
 import httpErrors from 'http-errors';
 import { CreateEnvironmentSchema } from '../schemas/environmentsSchemas';
 
+// TODO: cleanup methods arguments in a similar was as in ConfigsRepository
+
 export class EnvironmentsRepository {
   constructor(
     private prisma: PrismaClient,

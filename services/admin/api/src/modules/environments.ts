@@ -12,7 +12,7 @@ export async function environmentsModule(app: FastifyInstance) {
   const repository = app.environmentsRepository;
 
   app.get<{ Params: EnvironmentsParamsSchema }>(
-    '/projects/:projectId/envs',
+    '/projects/:projectId/environments',
     { schema: { params: environmentsParamsSchema } },
     async (request, reply) => {
       const envs = await repository.getAll(
@@ -27,7 +27,7 @@ export async function environmentsModule(app: FastifyInstance) {
     Params: EnvironmentsParamsSchema;
     Body: CreateEnvironmentSchema;
   }>(
-    '/projects/:projectId/envs',
+    '/projects/:projectId/environments',
     {
       schema: {
         params: environmentsParamsSchema,
@@ -46,9 +46,8 @@ export async function environmentsModule(app: FastifyInstance) {
 
   app.delete<{
     Params: EnvironmentParamsSchema;
-    Body: CreateEnvironmentSchema;
   }>(
-    '/projects/:projectId/envs/:id',
+    '/projects/:projectId/environments/:id',
     { schema: { params: environmentParamsSchema } },
     async (request, reply) => {
       await repository.remove(

@@ -4,6 +4,7 @@ import { environmentsModule } from './modules/environments';
 import errorHandlers from './plugins/errorHandlers';
 import authPlugin from './plugins/auth';
 import repositoriesPlugin from './plugins/repositories';
+import { configsModule } from './modules/configs';
 
 export async function createServer(options?: FastifyServerOptions) {
   const app = fastify({
@@ -25,6 +26,7 @@ export async function createServer(options?: FastifyServerOptions) {
   // Modules
   await app.register(projectsModule);
   await app.register(environmentsModule);
+  await app.register(configsModule);
 
   // Misc routes
   app.get('/', () => ({ status: 'ok' }));

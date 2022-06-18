@@ -38,7 +38,7 @@ describe.concurrent('ProjectsRepository', () => {
     });
     const data = { name: 'Test project' };
 
-    await expect(repository.insert({ data }, 1)).resolves.toEqual({
+    await expect(repository.insert({ userId: 1 }, { data })).resolves.toEqual({
       id: 1,
       ...data,
     });
@@ -50,7 +50,9 @@ describe.concurrent('ProjectsRepository', () => {
       delete: vi.fn(),
     });
 
-    await expect(repository.remove(1)).resolves.toBeUndefined();
+    await expect(
+      repository.remove({ userId: 1, id: 1 })
+    ).resolves.toBeUndefined();
   });
 
   it('should throw exception when deleting non-existent project', async () => {
@@ -59,7 +61,7 @@ describe.concurrent('ProjectsRepository', () => {
       delete: vi.fn(),
     });
 
-    await expect(repository.remove(1)).rejects.toThrowError(
+    await expect(repository.remove({ userId: 1, id: 1 })).rejects.toThrowError(
       'Project not found'
     );
   });
