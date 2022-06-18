@@ -74,4 +74,5 @@ async function repositoriesPlugin(app: FastifyInstance) {
 
 export default fastifyPlugin(repositoriesPlugin, {
   name: 'repositories-plugin',
+  dependencies: ['@fastify/sensible'],
 });

@@ -8,11 +8,16 @@
   "scripts": {
     "build": "turbo run build",
     "test": "turbo run test",
-    "dev": "docker compose -f docker-compose.dev.yml up --build",
-    "dev:local": "turbo run dev:local"
+    "start:dev": "yarn docker:dev",
+    "docker:base": "docker compose --project-directory . -f docker/compose.base.yml up",
+    "docker:dev": "docker compose --project-directory . -f docker/compose.base.yml -f docker/compose.dev.yml up --build",
+    "dev": "concurrently yarn:docker:base yarn:dev:admin-api",
+    "dev:admin-api": "nodemon --ext .ts --watch services/admin/api/src --exec turbo run admin-api#dev"
   },
   "dependencies": {
+    "concurrently": "^7.2.2",
     "glob": "^8.0.3",
+    "nodemon": "^2.0.16",
     "turbo": "^1.2.16"
   }
 }

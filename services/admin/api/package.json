@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "build": "tsc && node ../../../scripts/import-ext.cjs './dist/**/*.js'",
-    "dev:local": "node --inspect dist/main.js",
+    "dev": "node --inspect dist/main.js",
     "test": "vitest run --coverage"
   },
   "dependencies": {
@@ -15,6 +15,7 @@
     "fastify": "^4.0.1",
     "fastify-plugin": "^3.0.1",
     "http-errors": "^2.0.0",
+    "paseto": "^3.1.0",
     "pino": "^8.0.0",
     "prisma": "^3.15.1"
   },
