@@ -23,8 +23,8 @@ export async function createServer(options?: FastifyServerOptions) {
   await app.register(authPlugin);
 
   // Modules
-  await app.register(projectsModule, { prefix: '/data' });
-  await app.register(environmentsModule, { prefix: '/data' });
+  await app.register(projectsModule);
+  await app.register(environmentsModule);
 
   // Misc routes
   app.get('/', () => ({ status: 'ok' }));

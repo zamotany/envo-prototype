@@ -1,5 +1,6 @@
 import crypto from 'crypto';
 import paseto from 'paseto';
+import { nanoid } from 'nanoid';
 import { FastifyInstance } from 'fastify';
 import fastifyPlugin from 'fastify-plugin';
 import { Static, Type as T } from '@sinclair/typebox';
@@ -11,7 +12,7 @@ declare module 'fastify' {
 
   interface FastifyRequest {
     auth?: {
-      username: string;
+      userId: number;
     };
   }
 }
@@ -29,6 +30,7 @@ const ALLOWED_TOKEN = /^v4\.public\.[a-zA-Z0-9-_]+$/;
 
 async function authPlugin(app: FastifyInstance) {
   const key = await paseto.V4.generateKey('public');
+  const subjects: Record<number, string> = {};
 
   app.addHook('onRequest', async (request, reply) => {
     if (request.context.config.auth === false) {
@@ -52,15 +54,25 @@ async function authPlugin(app: FastifyInstance) {
       return;
     }
 
+    let payload: { sub: string };
     try {
-      const payload = (await paseto.V4.verify(token, key, {
+      payload = (await paseto.V4.verify(token, key, {
         clockTolerance: '10s',
       })) as { sub: string };
-      request.auth = { username: payload.sub };
     } catch {
       reply.unauthorized();
       return;
     }
+
+    const userId = Object.entries(subjects).find(
+      ([, sub]) => sub === payload.sub
+    )?.[0];
+    if (!userId) {
+      reply.unauthorized();
+      return;
+    }
+
+    request.auth = { userId: parseInt(userId, 10) };
   });
 
   app.post<{
@@ -119,20 +131,21 @@ async function authPlugin(app: FastifyInstance) {
       );
       const hash = hashBuffer.toString('hex');
 
-      const user =
-        (await app.prisma.user.findFirst({
-          select: {
-            username: true,
-          },
-          where: {
-            username,
-            salt,
-            hash,
-          },
-        })) ?? {};
+      const user = await app.prisma.user.findFirst({
+        select: {
+          id: true,
+        },
+        where: {
+          username,
+          salt,
+          hash,
+        },
+      });
 
       if (user) {
-        const token = await paseto.V4.sign({ sub: request.body.username }, key);
+        const sub = nanoid();
+        subjects[user.id] = sub;
+        const token = await paseto.V4.sign({ sub }, key);
         reply.send({
           data: { token },
         });
