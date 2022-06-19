@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "build": "tsc && node ../../../scripts/import-ext.cjs './dist/**/*.js'",
-    "dev": "node --inspect dist/main.js",
+    "dev": "nodemon --ext .ts --watch src --exec 'yarn build && node --inspect dist/main.js'",
     "test": "vitest run --coverage"
   },
   "dependencies": {

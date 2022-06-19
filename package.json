@@ -10,9 +10,10 @@
     "test": "turbo run test",
     "start:dev": "yarn docker:dev",
     "docker:base": "docker compose --project-directory . -f docker/compose.base.yml up",
-    "docker:dev": "docker compose --project-directory . -f docker/compose.base.yml -f docker/compose.dev.yml up --build",
+    "docker:test": "docker compose --project-directory . -f docker/compose.base.yml -f docker/compose.test.yml up --build",
     "dev": "concurrently yarn:docker:base yarn:dev:admin-api",
-    "dev:admin-api": "nodemon --ext .ts --watch services/admin/api/src --exec turbo run admin-api#dev"
+    "dev:admin-api": "yarn workspace admin-api run dev",
+    "dev:admin-app": "yarn workspace admin-app run dev"
   },
   "dependencies": {
     "concurrently": "^7.2.2",

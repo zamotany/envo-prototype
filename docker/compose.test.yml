@@ -1,0 +1,49 @@
+version: '3.8'
+services:
+  proxy:
+    image: nginx:latest
+    volumes:
+      - ./docker/.tmp/nginx:/var/log/nginx
+      - ./services/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./services/nginx/envo:/etc/nginx/envo
+      - ./services/nginx/ssl:/etc/nginx/ssl
+      - ./services/nginx/sites-available:/etc/nginx/sites-available
+      - ./services/nginx/sites-enabled:/etc/nginx/sites-enabled
+      - admin-app-dist:/var/www/public/admin
+    ports:
+      - "8080:8080"
+      - "4443:4443"
+    depends_on:
+      - admin-api
+
+  admin-api:
+    build:
+      context: ./
+      dockerfile: ./services/admin/api/Dockerfile
+      target: production
+    volumes:
+      - ./docker/.tmp/admin/api:/tmp/admin/api
+    environment:
+      - PORT=8081
+      - HOST=0.0.0.0
+      - LOGGING_LEVEL_CONSOLE=trace
+      - LOGGING_LEVEL_STDOUT=trace
+      - LOGGING_LEVEL_STDERR=warn
+      - LOGGING_STDOUT_FILE=/tmp/admin/api/stdout.log
+      - LOGGING_STDERR_FILE=/tmp/admin/api/stderr.log
+      - DATABASE_URL=postgresql://postgres:envo@admin-db:5432/envo?schema=public
+    ports:
+      - 8081:8081
+      - 9229:9229
+    depends_on:
+      - admin-db
+
+  admin-app:
+    build:
+      context: ./
+      dockerfile: ./services/admin/app/Dockerfile
+    volumes:
+      - admin-app-dist:/usr/src/services/admin/app/dist
+
+volumes:
+  admin-app-dist: 
