@@ -1,5 +1,9 @@
 # envo
 
+This project is a prototype of a remote configuration solution, mainly developed for personal growth.
+
+It allows to manage projects, their environments, configs, publish drafts and revert live configs.
+
 ## Prerequisites
 
 - Node 16+
