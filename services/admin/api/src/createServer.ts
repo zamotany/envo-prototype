@@ -19,6 +19,9 @@ export async function createServer(options?: FastifyServerOptions) {
 
   // Plugins
   await app.register(import('@fastify/sensible'));
+  await app.register(import('@fastify/cors'), {
+    origin: process.env.CORS_ALLOWED_ORIGIN.split(','),
+  });
   await app.register(errorHandlers);
   await app.register(repositoriesPlugin);
   await app.register(authPlugin);

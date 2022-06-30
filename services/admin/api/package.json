@@ -8,6 +8,7 @@
     "test": "vitest run --coverage"
   },
   "dependencies": {
+    "@fastify/cors": "^8.0.0",
     "@fastify/sensible": "^5.0.0",
     "@prisma/client": "^3.15.1",
     "@sinclair/typebox": "^0.23.5",

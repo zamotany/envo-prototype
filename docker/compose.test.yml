@@ -32,6 +32,7 @@ services:
       - LOGGING_STDOUT_FILE=/tmp/admin/api/stdout.log
       - LOGGING_STDERR_FILE=/tmp/admin/api/stderr.log
       - DATABASE_URL=postgresql://postgres:envo@admin-db:5432/envo?schema=public
+      - CORS_ALLOWED_ORIGIN=https://localhost:4443,http://localhost:3000
     ports:
       - 8081:8081
       - 9229:9229

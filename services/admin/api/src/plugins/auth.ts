@@ -18,8 +18,10 @@ declare module 'fastify' {
 }
 
 const loginBodySchema = T.Object({
-  username: T.String(),
-  password: T.String(),
+  data: T.Object({
+    username: T.String(),
+    password: T.String(),
+  }),
 });
 
 const ALLOWED_ENCODED_URI = /^[a-zA-Z0-9!%*()-_'.~]+$/;
@@ -86,18 +88,18 @@ async function authPlugin(app: FastifyInstance) {
     '/user/token',
     { schema: { body: loginBodySchema }, config: { auth: false } },
     async (request, reply) => {
-      if (!ALLOWED_ENCODED_URI.test(request.body.username)) {
+      if (!ALLOWED_ENCODED_URI.test(request.body.data.username)) {
         reply.badRequest('Username must be URI encoded');
         return;
       }
 
-      if (!ALLOWED_ENCODED_URI.test(request.body.password)) {
+      if (!ALLOWED_ENCODED_URI.test(request.body.data.password)) {
         reply.badRequest('Password must be URI encoded');
         return;
       }
 
-      const username = decodeURIComponent(request.body.username);
-      const password = decodeURIComponent(request.body.password);
+      const username = decodeURIComponent(request.body.data.username);
+      const password = decodeURIComponent(request.body.data.password);
 
       if (!ALLOWED_USERNAME_CHARS.test(username)) {
         reply.badRequest('Username is not valid');

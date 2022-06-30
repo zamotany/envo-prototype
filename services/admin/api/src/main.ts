@@ -12,6 +12,7 @@ declare global {
       LOGGING_LEVEL_STDERR: string;
       LOGGING_STDOUT_FILE: string;
       LOGGING_STDERR_FILE: string;
+      CORS_ALLOWED_ORIGIN: string;
     }
   }
 }

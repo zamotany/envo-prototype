@@ -52,8 +52,7 @@ async function errorHandlersPlugin(app: FastifyInstance) {
 
   app.addHook('onRequest', async (request, reply) => {
     if (
-      request.method !== 'GET' &&
-      request.method !== 'DELETE' &&
+      !['GET', 'OPTIONS', 'DELETE'].includes(request.method) &&
       !/^application\/json(; charset=.+)?$/.test(
         request.headers['content-type'] ?? ''
       )
