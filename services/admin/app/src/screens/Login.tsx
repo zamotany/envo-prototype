@@ -36,7 +36,7 @@ export function Login() {
   const user = useUser();
   const [loginError, setLoginError] = React.useState('');
 
-  const login = useMutation(apiClient.postLogin, {
+  const login = useMutation(apiClient.postForToken, {
     onSuccess: (response) => {
       const { token } = response.data;
       user.setToken(token);

@@ -1,28 +1,38 @@
 import ky from 'ky';
-import { postLogin } from './requests/login';
+import { postForToken } from './requests/login';
 
 interface ApiClientOptions {
   getToken: () => string | undefined;
 }
 
 export function createApiClient({ getToken }: ApiClientOptions) {
-  let httpClient: typeof ky | undefined;
-  let lastToken = getToken();
-
-  if (!httpClient || lastToken !== getToken()) {
-    lastToken = getToken();
-    httpClient = ky.extend({
+  function initHttpClient() {
+    return ky.extend({
       // TODO: move to config
       prefixUrl: 'https://localhost:4443/api/admin',
       headers: {
-        Authorization: `Bearer ${lastToken}`,
+        Authorization: `Bearer ${getToken()}`,
       },
     });
   }
 
+  let httpClient = initHttpClient();
+
+  function reset() {
+    httpClient = initHttpClient();
+  }
+
+  function wrapRequestFunction<
+    T extends (client: typeof ky) => (...args: any[]) => any
+  >(fn: T) {
+    return ((...args: Parameters<ReturnType<T>>) =>
+      fn(httpClient)(...args)) as ReturnType<T>;
+  }
+
   return {
     httpClient,
-    postLogin: postLogin(httpClient),
+    reset,
+    postForToken: wrapRequestFunction(postForToken),
   };
 }
 

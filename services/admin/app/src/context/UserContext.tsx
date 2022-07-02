@@ -82,5 +82,6 @@ export function useUser({ subscribe }: UseUserOptions = {}) {
     getToken,
     setToken,
     isAuthenticated,
+    onChange,
   };
 }

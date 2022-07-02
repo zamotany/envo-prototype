@@ -7,10 +7,16 @@ const ApiContext = React.createContext({
 });
 
 export function ApiProvider({ children }: { children: React.ReactNode }) {
-  const { getToken } = useUser();
+  const { getToken, onChange } = useUser();
   const contextRef = React.useRef({
     client: createApiClient({ getToken }),
   });
+
+  React.useEffect(() => {
+    return onChange(() => {
+      contextRef.current.client.reset();
+    });
+  }, []);
 
   return (
     <ApiContext.Provider value={contextRef.current}>
