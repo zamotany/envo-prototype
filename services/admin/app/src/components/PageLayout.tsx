@@ -1,22 +1,23 @@
-import { Flex, Text, Container } from '@chakra-ui/react';
+import { Flex, Container } from '@chakra-ui/react';
 import * as React from 'react';
+import { Logo } from './Logo';
 
 export function PageLayout({ children }: { children: React.ReactNode }) {
   return (
     <Flex width="full" direction="column">
       <Flex width="full" py="2">
-        <Container maxWidth="container.lg">
-          <Text
-            textColor="teal.600"
-            fontSize="4xl"
-            fontWeight="bold"
-            textAlign="center"
-          >
-            envo
-          </Text>
+        <Container maxWidth="container.md">
+          <Logo
+            fill="teal.500"
+            backgroundFill="gray.100"
+            boxSize="200px"
+            margin="auto"
+          />
         </Container>
       </Flex>
-      <Container py="4">{children}</Container>
+      <Container py="1" maxWidth="container.md">
+        {children}
+      </Container>
     </Flex>
   );
 }

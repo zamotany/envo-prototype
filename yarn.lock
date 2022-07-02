@@ -1502,6 +1502,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fontsource/nova-mono@npm:^4.5.8":
+  version: 4.5.8
+  resolution: "@fontsource/nova-mono@npm:4.5.8"
+  checksum: 3457b1b2bbc3d7f9bc93f74c5b4b452294b7d78683f96c22c5ba3282005b0e3c2b3516924ee3ab455ac3dae714ce88eb6db03810ef241eac9644ddd4e9ad80a5
+  languageName: node
+  linkType: hard
+
 "@fontsource/open-sans@npm:^4.5.10":
   version: 4.5.10
   resolution: "@fontsource/open-sans@npm:4.5.10"
@@ -2074,6 +2081,7 @@ __metadata:
     "@chakra-ui/react": ^2.2.1
     "@emotion/react": ^11.9.3
     "@emotion/styled": ^11.9.3
+    "@fontsource/nova-mono": ^4.5.8
     "@fontsource/open-sans": ^4.5.10
     "@hookform/resolvers": ^2.9.3
     "@types/react": ^18.0.0
