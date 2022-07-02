@@ -16,7 +16,9 @@ export function Environment() {
   const renderEnvironment = React.useCallback((_config: typeof configs[0]) => {
     return (
       <Button
-        backgroundColor="gray.50"
+        backgroundColor="white"
+        border="1px"
+        borderColor="gray.200"
         px="4"
         py="2"
         rounded="base"

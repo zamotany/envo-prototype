@@ -1,5 +1,6 @@
 import ky from 'ky';
 import { postForToken } from './requests/login';
+import { getProjects } from './requests/projects';
 
 interface ApiClientOptions {
   getToken: () => string | undefined;
@@ -33,6 +34,7 @@ export function createApiClient({ getToken }: ApiClientOptions) {
     httpClient,
     reset,
     postForToken: wrapRequestFunction(postForToken),
+    getProjects: wrapRequestFunction(getProjects),
   };
 }
 

@@ -2096,6 +2096,7 @@ __metadata:
     react-icons: ^4.4.0
     react-query: ^3.39.1
     react-router-dom: ^6.3.0
+    react-spinners: ^0.13.3
     typescript: ^4.7.3
     vite: ^2.9.9
     yup: ^0.32.11
@@ -5996,6 +5997,16 @@ __metadata:
   peerDependencies:
     react: ">=16.8"
   checksum: 7be673f5e72104be01e6ab274516bdb932efd93305243170690f6560e3bd1035dd1df3d3c9ce1e0f452638a2529f43a1e77dcf0934fc8031c4783da657be13ca
+  languageName: node
+  linkType: hard
+
+"react-spinners@npm:^0.13.3":
+  version: 0.13.3
+  resolution: "react-spinners@npm:0.13.3"
+  peerDependencies:
+    react: ^16.0.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
+  checksum: d2798ed59d129fb151e3ec99d027a77ff5a2faeed3d05d94707a53dce56406ed94b72da1c99f142bae563e366827aac53fcb1ae403074a3b1f78bb4f519dea72
   languageName: node
   linkType: hard
 

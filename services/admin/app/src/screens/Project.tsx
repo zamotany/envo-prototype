@@ -28,7 +28,9 @@ export function Project() {
         <Link
           as={RouterLink}
           to={`environment/${environment.id}`}
-          backgroundColor="gray.50"
+          backgroundColor="white"
+          border="1px"
+          borderColor="gray.200"
           px="4"
           py="2"
           rounded="base"
