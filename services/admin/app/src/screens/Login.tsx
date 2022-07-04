@@ -2,12 +2,14 @@ import * as React from 'react';
 import {
   Button,
   Flex,
+  FormErrorMessage,
   Heading,
   Input,
   InputGroup,
   InputLeftElement,
   Text,
   VStack,
+  FormControl,
 } from '@chakra-ui/react';
 import { VscPerson, VscKey, VscArrowRight } from 'react-icons/vsc';
 import { useForm } from 'react-hook-form';
@@ -70,50 +72,50 @@ export function Login() {
         <form onSubmit={handleSubmit(onSubmit)}>
           <VStack align="flex-start">
             <Flex direction="column">
-              <InputGroup size="md">
-                <InputLeftElement
-                  pointerEvents="none"
-                  children={<VscPerson color="gray.300" />}
-                />
-                <Input
-                  pr="4rem"
-                  type="text"
-                  placeholder="Enter username"
-                  autoComplete="username"
-                  backgroundColor="white"
-                  isInvalid={Boolean(errors.username)}
-                  errorBorderColor="red.600"
-                  {...register('username', { onChange: onFormFieldChange })}
-                />
-              </InputGroup>
-              {errors.username ? (
-                <Text textAlign="left" fontSize="sm" color="red.600">
-                  {errors.username.message}
-                </Text>
-              ) : null}
+              <FormControl isInvalid={Boolean(errors.username)}>
+                <InputGroup size="md">
+                  <InputLeftElement
+                    pointerEvents="none"
+                    children={<VscPerson color="gray.300" />}
+                  />
+                  <Input
+                    pr="4rem"
+                    type="text"
+                    placeholder="Enter username"
+                    autoComplete="username"
+                    backgroundColor="white"
+                    isInvalid={Boolean(errors.username)}
+                    errorBorderColor="red.600"
+                    {...register('username', { onChange: onFormFieldChange })}
+                  />
+                </InputGroup>
+                {errors.username ? (
+                  <FormErrorMessage>{errors.username.message}</FormErrorMessage>
+                ) : null}
+              </FormControl>
             </Flex>
             <Flex direction="column">
-              <InputGroup size="md">
-                <InputLeftElement
-                  pointerEvents="none"
-                  children={<VscKey color="gray.300" />}
-                />
-                <Input
-                  pr="4rem"
-                  type="password"
-                  placeholder="Enter password"
-                  autoComplete="current-password"
-                  backgroundColor="white"
-                  isInvalid={Boolean(errors.password)}
-                  errorBorderColor="red.600"
-                  {...register('password', { onChange: onFormFieldChange })}
-                />
-              </InputGroup>
-              {errors.password ? (
-                <Text textAlign="left" fontSize="sm" color="red.600">
-                  {errors.password.message}
-                </Text>
-              ) : null}
+              <FormControl isInvalid={Boolean(errors.password)}>
+                <InputGroup size="md">
+                  <InputLeftElement
+                    pointerEvents="none"
+                    children={<VscKey color="gray.300" />}
+                  />
+                  <Input
+                    pr="4rem"
+                    type="password"
+                    placeholder="Enter password"
+                    autoComplete="current-password"
+                    backgroundColor="white"
+                    isInvalid={Boolean(errors.password)}
+                    errorBorderColor="red.600"
+                    {...register('password', { onChange: onFormFieldChange })}
+                  />
+                </InputGroup>
+                {errors.password ? (
+                  <FormErrorMessage>{errors.password.message}</FormErrorMessage>
+                ) : null}
+              </FormControl>
             </Flex>
             <Button
               colorScheme="teal"
